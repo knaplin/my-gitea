@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: gitea
+  template:
+    metadata:
+      labels:
+        component: gitea
+    spec:
+      containers:
+      - name: gitea-container
+        image: gitea/gitea:latest
+        ports:
+        - containerPort: 3000
+          name: http
+        - containerPort: 22
+          name: ssh
